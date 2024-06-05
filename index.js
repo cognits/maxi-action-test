@@ -17,6 +17,7 @@ try {
         console.log(`Unknown action: ${action}`);
     }
     
+    console.log('version', result);
     core.setOutput('version', result);
     
 } catch (error) {
