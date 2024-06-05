@@ -3,9 +3,9 @@ const exec   = require('child_process').execSync;
 const debug = require('debug')('action');
 
 
-const calculateNextVersion = (doCounter) => {
+const calculateNextVersion = (format, doCounter) => {
     // calendar version
-    const todaykey = moment().format('YYYYMM');
+    const todaykey = moment().format(format);
     debug('base date: ', todaykey);
 
     // sub-counter

@@ -5,11 +5,12 @@ const { calculateNextVersion, queryLatest } = require('./functions');
 try {
     const action    = core.getInput('action');
     const doCounter = core.getInput('counter');
+    const format    = core.getInput('format');
 
     let result = '';
 
     if (action == 'generate') {
-        result = calculateNextVersion(!!doCounter);
+        result = calculateNextVersion(format, !!doCounter);
     } else if (action == 'query') {
         result = queryLatest();
     } else {

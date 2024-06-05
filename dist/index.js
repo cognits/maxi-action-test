@@ -9,9 +9,9 @@ const exec   = (__nccwpck_require__(2081).execSync);
 const debug = __nccwpck_require__(1019)('action');
 
 
-const calculateNextVersion = (doCounter) => {
+const calculateNextVersion = (format, doCounter) => {
     // calendar version
-    const todaykey = moment().format('YYYYMM');
+    const todaykey = moment().format(format);
     debug('base date: ', todaykey);
 
     // sub-counter
@@ -38083,11 +38083,12 @@ const { calculateNextVersion, queryLatest } = __nccwpck_require__(800);
 try {
     const action    = core.getInput('action');
     const doCounter = core.getInput('counter');
+    const format    = core.getInput('format');
 
     let result = '';
 
     if (action == 'generate') {
-        result = calculateNextVersion(!!doCounter);
+        result = calculateNextVersion(format, !!doCounter);
     } else if (action == 'query') {
         result = queryLatest();
     } else {

@@ -4,6 +4,10 @@ inputs:
   action:
     description: 'calculate or query'
     required: true
+  format:
+    description: 'the format for the calver part'
+    required: false
+    default: YYMM
   counter:
     description: 'generate versions with subcounter'
     required: false
