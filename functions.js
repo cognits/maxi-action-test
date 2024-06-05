@@ -6,15 +6,15 @@ const debug = require('debug')('action');
 const calculateNextVersion = (doCounter) => {
     // calendar version
     const todaykey = moment().format('YYYYMM');
-    console.log('base date: ', todaykey);
+    debug('base date: ', todaykey);
 
     // sub-counter
     const allTags = exec('git tag').toString('utf-8').trim().split('\n');
     const currentTags = allTags.filter(v => v.includes(todaykey));
     const count = currentTags.length;
-    console.log('current tags: ', currentTags);
-    console.log('max         : ', count);
-    console.log('next        : ', count+1);
+    debug('current tags: ', currentTags);
+    debug('max         : ', count);
+    debug('next        : ', count+1);
 
     // hash commit
     const shortHash = exec("git rev-parse --short HEAD").toString('utf-8').trim();
@@ -25,7 +25,7 @@ const calculateNextVersion = (doCounter) => {
     } else {
         next = `${todaykey}.${shortHash}`;
     }
-    console.log('next        : ', next);
+    debug('next        : ', next);
     return next;
 }
 
