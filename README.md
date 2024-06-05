@@ -4,22 +4,28 @@ This action prints "Hello World" or "Hello" + the name of a person to greet to t
 
 ## Inputs
 
-### `who-to-greet`
+### `action`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** The action to perform:
+`generate` Generate a new version
+`query` Query the latest version in the current branch
+
+### `counter`
+
+**Required** Wether to generate using a subcounter
 
 ## Outputs
 
-### `time`
+### `version`
 
-The time we greeted you.
+The generated or queried version, depending on the action
 
 ## Example usage
 
 ```yaml
 uses: actions/hello-world-javascript-action@e76147da8e5c81eaf017dede5645551d4b94427b
 with:
-  who-to-greet: 'Mona the Octocat'
+  do-counter: true
 ```
 
 

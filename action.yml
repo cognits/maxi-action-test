@@ -1,13 +1,16 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  action:
+    description: 'calculate or query'
     required: true
-    default: 'World'
+  action:
+    description: 'generate versions with subcounter'
+    required: false
+    default: true
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  version:
+    description: 'The generated or calculated version'
 runs:
   using: 'node20'
   main: 'dist/index.js'
