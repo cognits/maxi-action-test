@@ -12,6 +12,8 @@ try {
         result = calculateNextVersion(!!doCounter);
     } else if (action == 'query') {
         result = queryLatest();
+    } else {
+        console.log(`Unknown action: ${action}`);
     }
     
     core.setOutput('version', result);

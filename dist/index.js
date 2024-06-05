@@ -12,15 +12,15 @@ const debug = __nccwpck_require__(1019)('action');
 const calculateNextVersion = (doCounter) => {
     // calendar version
     const todaykey = moment().format('YYYYMM');
-    console.log('base date: ', todaykey);
+    debug('base date: ', todaykey);
 
     // sub-counter
     const allTags = exec('git tag').toString('utf-8').trim().split('\n');
     const currentTags = allTags.filter(v => v.includes(todaykey));
     const count = currentTags.length;
-    console.log('current tags: ', currentTags);
-    console.log('max         : ', count);
-    console.log('next        : ', count+1);
+    debug('current tags: ', currentTags);
+    debug('max         : ', count);
+    debug('next        : ', count+1);
 
     // hash commit
     const shortHash = exec("git rev-parse --short HEAD").toString('utf-8').trim();
@@ -31,7 +31,7 @@ const calculateNextVersion = (doCounter) => {
     } else {
         next = `${todaykey}.${shortHash}`;
     }
-    console.log('next        : ', next);
+    debug('next        : ', next);
     return next;
 }
 
@@ -38081,22 +38081,23 @@ const github = __nccwpck_require__(4175);
 const { calculateNextVersion, queryLatest } = __nccwpck_require__(800);
 
 try {
-    const action = core.getInput('action');
+    const action    = core.getInput('action');
     const doCounter = core.getInput('counter');
 
-    let next = '';
-    let latest = '';
+    let result = '';
 
-    if (action == 'calculateNext') {
-        next = calculateNextVersion(doCounter);
-    } else if (action == 'queryLatest') {
-        latest = queryLatest();
+    if (action == 'generate') {
+        result = calculateNextVersion(!!doCounter);
+    } else if (action == 'query') {
+        result = queryLatest();
+    } else {
+        console.log(`Unknown action: ${action}`);
     }
     
-    core.setOutput('next', next)  
-    core.setOutput('latest', latest);
-
+    core.setOutput('version', result);
+    
 } catch (error) {
+
     core.setFailed(error.message);
 }
 
